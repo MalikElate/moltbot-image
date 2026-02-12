@@ -12,5 +12,12 @@ if [ ! -f "$CONFIG_FILE" ] && [ -n "$OPENROUTER_API_KEY" ]; then
   cat "$CONFIG_FILE"
 fi
 
+# Verify env vars are available
+if [ -n "$OPENROUTER_API_KEY" ]; then
+  echo "[entrypoint] OPENROUTER_API_KEY is set (${#OPENROUTER_API_KEY} chars, starts with ${OPENROUTER_API_KEY%${OPENROUTER_API_KEY#?????}}...)"
+else
+  echo "[entrypoint] WARNING: OPENROUTER_API_KEY is NOT set!"
+fi
+
 echo "[entrypoint] Starting gateway..."
 exec node dist/index.js gateway --bind lan --allow-unconfigured
