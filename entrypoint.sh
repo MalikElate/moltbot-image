@@ -7,7 +7,7 @@ CONFIG_FILE="$CONFIG_DIR/moltbot.json"
 if [ ! -f "$CONFIG_FILE" ] && [ -n "$OPENROUTER_API_KEY" ]; then
   echo "[entrypoint] Configuring OpenRouter provider..."
   mkdir -p "$CONFIG_DIR"
-  printf '{"agents":{"defaults":{"model":{"primary":"openrouter/openai/gpt-4o-mini"}}},"plugins":{"slots":{"memory":"none"}},"gateway":{"trustedProxies":["0.0.0.0/0"]}}\n' > "$CONFIG_FILE"
+  printf '{"env":{"OPENROUTER_API_KEY":"%s"},"agents":{"defaults":{"model":{"primary":"openrouter/openai/gpt-4o-mini"}}},"plugins":{"slots":{"memory":"none"}},"gateway":{"trustedProxies":["0.0.0.0/0"]}}\n' "$OPENROUTER_API_KEY" > "$CONFIG_FILE"
   echo "[entrypoint] Config written to $CONFIG_FILE"
   cat "$CONFIG_FILE"
 fi
