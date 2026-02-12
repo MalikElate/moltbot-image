@@ -4,6 +4,9 @@ FROM moltbot/moltbot:latest
 RUN mkdir -p /app/docs/reference/templates
 COPY templates/ /app/docs/reference/templates/
 
-# Use entrypoint to write config at runtime (avoids root ownership issues)
+# Pre-create .moltbot config dir (avoids cross-device migration error)
+RUN mkdir -p /home/node/.moltbot && chown node:node /home/node/.moltbot
+
+# Use entrypoint to write config at runtime
 COPY entrypoint.sh /app/entrypoint.sh
 ENTRYPOINT ["/bin/sh", "/app/entrypoint.sh"]
