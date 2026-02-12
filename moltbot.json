@@ -1,0 +1,9 @@
+{
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "openrouter/anthropic/claude-3.5-haiku"
+      }
+    }
+  }
+}

@@ -5,3 +5,8 @@ FROM moltbot/moltbot:latest
 RUN mkdir -p /app/docs/reference/templates
 
 COPY templates/ /app/docs/reference/templates/
+
+# Pre-create config directory and default config
+# The OPENROUTER_API_KEY env var will be read at runtime
+RUN mkdir -p /home/node/.clawdbot
+COPY moltbot.json /home/node/.clawdbot/moltbot.json
