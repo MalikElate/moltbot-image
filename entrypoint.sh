@@ -13,4 +13,4 @@ if [ ! -f "$CONFIG_FILE" ] && [ -n "$OPENROUTER_API_KEY" ]; then
 fi
 
 echo "[entrypoint] Starting gateway..."
-exec node openclaw.mjs gateway --allow-unconfigured
+exec node dist/index.js gateway --bind lan --allow-unconfigured
